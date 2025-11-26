@@ -1,0 +1,2 @@
+Câu hỏi của tôi là:
+"Giải thích chi tiết về SQL Injection: Tại sao việc viết câu lệnh SQL bằng cách nối chuỗi trực tiếp như $sql = "INSERT INTO sinhvien (ten_sinh_vien) VALUES ('$ten')" lại cực kỳ nguy hiểm? Hãy cho một ví dụ cụ thể về cách hacker có thể khai thác lỗ hổng này. So sánh với cách dùng Prepared Statement $stmt->execute([$ten]) - tại sao phương pháp này lại an toàn hơn và PDO xử lý như thế nào để ngăn chặn các cuộc tấn công?"

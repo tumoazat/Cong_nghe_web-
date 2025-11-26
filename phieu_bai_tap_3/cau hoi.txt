@@ -1,0 +1,1 @@
+câu hỏi : Điều gì sẽ xảy ra nếu dùng header('Location: ...') nhưng lại echo HTML trước đó?
