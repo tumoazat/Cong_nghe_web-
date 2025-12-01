@@ -3,7 +3,7 @@
 
 // Hàm lấy tất cả sinh viên
 function getAllSinhVien($pdo) {
-    $sql = "SELECT * FROM sinhvien";
+    $sql = "SELECT * FROM sinhvien ORDER BY ngay_tao DESC";
     $stmt = $pdo->query($sql);
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
