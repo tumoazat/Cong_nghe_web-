@@ -1,0 +1,2 @@
+Câu hỏi của tôi là:
+"Trong kiến trúc MVC, tại sao Controller không trực tiếp hiển thị HTML mà phải gọi View? Nếu Controller tự echo HTML thì có vấn đề gì? Lợi ích thực tế của việc tách riêng View là gì khi làm dự án lớn?"
