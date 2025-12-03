@@ -130,15 +130,6 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.php [QSA,L]
 ```
 
-## Cài đặt bước 6: Phân quyền thư mục (Linux/Mac)
-
-```bash
-# Phân quyền thư mục uploads
-chmod -R 755 onlinecourse/assets/uploads/
-
-# Nếu cần, phân quyền cho web server
-sudo chown -R www-data:www-data onlinecourse/assets/uploads/
-```
 
 ## Kiểm tra cài đặt
 
@@ -146,7 +137,7 @@ sudo chown -R www-data:www-data onlinecourse/assets/uploads/
 
 Mở trình duyệt và truy cập:
 ```
-http://localhost/onlinecourse
+http://localhost:3000/onlinecourse/index.php
 ```
 
 Bạn sẽ thấy trang chủ với danh sách khóa học.
@@ -201,9 +192,7 @@ Hệ thống đã có sẵn 3 tài khoản mẫu:
 ```bash
 # Kiểm tra MySQL đang chạy
 # XAMPP: Mở XAMPP Control Panel, start MySQL
-# Linux:
-sudo service mysql status
-sudo service mysql start
+
 ```
 
 ### Lỗi 2: "404 Not Found" hoặc routing không hoạt động
