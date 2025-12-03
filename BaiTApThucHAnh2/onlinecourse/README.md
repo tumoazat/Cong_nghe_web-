@@ -82,14 +82,13 @@ onlinecourse/
    ```php
    private $máy_chủ = 'localhost';
    private $tên_csdl = 'onlinecourse';
-   private $tên_người_dùng = 'root';
-   private $mật_khẩu = '';
+   
    ```
 
 4. **Cấu hình web server**
    - Đặt thư mục `onlinecourse` vào document root (htdocs/www)
    - Đảm bảo mod_rewrite được bật (Apache)
-   - Truy cập: `http://localhost/onlinecourse`
+   - Truy cập: `http://localhost:3000/onlinecourse/index.php`
 
 5. **Đăng nhập với tài khoản mặc định**
    - **Quản trị viên:**
