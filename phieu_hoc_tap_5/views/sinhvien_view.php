@@ -71,14 +71,14 @@
     </style>
 </head>
 <body>
-    <h2>Thêm Sinh Viên Mới (Chủ đề 4.3)</h2>
+    <h2>Thêm Sinh Viên Mới (Mô hình MVC)</h2>
     <form action="index.php" method="POST">
         Tên sinh viên: <input type="text" name="ten_sinh_vien" required>
         Email: <input type="email" name="email" required>
         <button type="submit">Thêm</button>
     </form>
 
-    <h2>Danh Sách Sinh Viên (Chủ đề 4.2)</h2>
+    <h2>Danh Sách Sinh Viên (Mô hình MVC)</h2>
     <table>
         <tr>
             <th>ID</th>
@@ -88,13 +88,17 @@
         </tr>
         <?php
         // Duyệt qua danh sách sinh viên được truyền từ Controller
-        foreach ($danh_sach_sv as $sv) {
-            echo "<tr>";
-            echo "<td>" . htmlspecialchars($sv['id']) . "</td>";
-            echo "<td>" . htmlspecialchars($sv['ten_sinh_vien']) . "</td>";
-            echo "<td>" . htmlspecialchars($sv['email']) . "</td>";
-            echo "<td>" . htmlspecialchars($sv['ngay_tao']) . "</td>";
-            echo "</tr>";
+        if (isset($danh_sach_sv) && is_array($danh_sach_sv) && count($danh_sach_sv) > 0) {
+            foreach ($danh_sach_sv as $sv) {
+                echo "<tr>";
+                echo "<td>" . htmlspecialchars($sv['id']) . "</td>";
+                echo "<td>" . htmlspecialchars($sv['ten_sinh_vien']) . "</td>";
+                echo "<td>" . htmlspecialchars($sv['email']) . "</td>";
+                echo "<td>" . htmlspecialchars($sv['ngay_tao']) . "</td>";
+                echo "</tr>";
+            }
+        } else {
+            echo "<tr><td colspan='4' style='text-align: center;'>Chưa có dữ liệu sinh viên</td></tr>";
         }
         ?>
     </table>
