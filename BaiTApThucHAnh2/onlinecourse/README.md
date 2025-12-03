@@ -224,8 +224,8 @@ Các tính năng có thể mở rộng:
 ## Liên hệ và Hỗ trợ
 
 Nếu có vấn đề hoặc câu hỏi, vui lòng liên hệ:
-- Email: support@onlinecourse.com
-- GitHub Issues: [link to issues]
+- Email: dosuharu808@gmail.com
+
 
 ## License
 
