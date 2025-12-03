@@ -1,0 +1,229 @@
+TRƯỜNG ĐẠI HỌC THỦY LỢI
+KHOA CNTT
+________________________________________
+BÀI TẬP THỰC HÀNH SỐ 02 – 2025 – K65
+Xây dựng website quản lý khóa học online với PHP & MySQL (theo mô hình OOP MVC)
+Tham khảo Video hướng dẫn MVC OOP cơ bản: #5. Hướng dẫn code PHP MVC cơ bản
+Mục tiêu:
+•	Sinh viên nắm vững kiến thức về CSDL quan hệ, thiết kế CSDL cho ứng dụng web quản lý khóa học.
+•	Sinh viên thành thạo lập trình hướng đối tượng trong PHP.
+•	Sinh viên hiểu và áp dụng được mô hình MVC trong việc tổ chức mã nguồn.
+•	Sinh viên có khả năng xây dựng website quản lý khóa học online với hai vai trò: học viên và giảng viên/quản trị viên.
+Yêu cầu:
+•	Sử dụng PHP và MySQL để xây dựng website.
+•	Áp dụng mô hình MVC trong tổ chức mã nguồn.
+•	Website có hai vai trò: học viên và giảng viên/quản trị viên.
+•	Học viên có thể xem danh sách khóa học, đăng ký khóa học, xem chi tiết khóa học, theo dõi tiến độ học tập.
+•	Giảng viên có thể đăng nhập, đăng xuất, tạo khóa học, chỉnh sửa khóa học, xóa khóa học, đăng tải tài liệu, xem danh sách học viên.
+________________________________________
+HƯỚNG DẪN
+Chuẩn bị
+Sinh viên tạo lập nhóm 4 người, sử dụng Github để làm việc nhóm (quá trình làm việc yêu cầu rẽ nhánh), sử dụng Figma để phác họa giao diện website.
+1. Thiết kế cơ sở dữ liệu
+Sử dụng MySQL Workbench hoặc phpMyAdmin để tạo CSDL onlinecourse với các bảng sau:
+Bảng users
+•	id (INT, PRIMARY KEY, AUTO_INCREMENT)
+•	username (VARCHAR(255), UNIQUE)
+•	email (VARCHAR(255), UNIQUE)
+•	password (VARCHAR(255))
+•	fullname (VARCHAR(255))
+•	role (INT) — 0: học viên, 1: giảng viên, 2: quản trị viên
+•	created_at (DATETIME)
+Bảng courses
+•	id (INT, PRIMARY KEY, AUTO_INCREMENT)
+•	title (VARCHAR(255))
+•	description (TEXT)
+•	instructor_id (INT) — khóa ngoại liên kết với bảng users
+•	category_id (INT) — khóa ngoại liên kết với bảng categories
+•	price (DECIMAL(10,2))
+•	duration_weeks (INT)
+•	level (VARCHAR(50)) — Beginner, Intermediate, Advanced
+•	image (VARCHAR(255))
+•	created_at (DATETIME)
+•	updated_at (DATETIME)
+Bảng categories
+•	id (INT, PRIMARY KEY, AUTO_INCREMENT)
+•	name (VARCHAR(255))
+•	description (TEXT)
+•	created_at (DATETIME)
+Bảng enrollments
+•	id (INT, PRIMARY KEY, AUTO_INCREMENT)
+•	course_id (INT) — khóa ngoại liên kết với bảng courses
+•	student_id (INT) — khóa ngoại liên kết với bảng users
+•	enrolled_date (DATETIME)
+•	status (VARCHAR(50)) — active, completed, dropped
+•	progress (INT) — phần trăm hoàn thành (0-100)
+Bảng lessons
+•	id (INT, PRIMARY KEY, AUTO_INCREMENT)
+•	course_id (INT) — khóa ngoại liên kết với bảng courses
+•	title (VARCHAR(255))
+•	content (LONGTEXT)
+•	video_url (VARCHAR(255))
+•	order (INT)
+•	created_at (DATETIME)
+Bảng materials
+•	id (INT, PRIMARY KEY, AUTO_INCREMENT)
+•	lesson_id (INT) — khóa ngoại liên kết với bảng lessons
+•	filename (VARCHAR(255))
+•	file_path (VARCHAR(255))
+•	file_type (VARCHAR(50)) — pdf, doc, ppt, v.v.
+•	uploaded_at (DATETIME)
+
+
+
+
+
+
+
+
+
+
+
+
+2. Xây dựng cấu trúc thư mục theo mô hình MVC
+onlinecourse/
+├── controllers/
+│ ├── HomeController.php
+│ ├── AuthController.php
+│ ├── CourseController.php
+│ ├── EnrollmentController.php
+│ ├── LessonController.php
+│ └── AdminController.php
+├── models/
+│ ├── User.php
+│ ├── Course.php
+│ ├── Category.php
+│ ├── Enrollment.php
+│ ├── Lesson.php
+│ └── Material.php
+├── views/
+│ ├── layouts/
+│ │ ├── header.php
+│ │ ├── footer.php
+│ │ └── sidebar.php
+│ ├── home/
+│ │ └── index.php
+│ ├── courses/
+│ │ ├── index.php
+│ │ ├── detail.php
+│ │ └── search.php
+│ ├── auth/
+│ │ ├── login.php
+│ │ └── register.php
+│ ├── student/
+│ │ ├── dashboard.php
+│ │ ├── my_courses.php
+│ │ └── course_progress.php
+│ ├── instructor/
+│ │ ├── dashboard.php
+│ │ ├── my_courses.php
+│ │ ├── course/
+│ │ │ ├── create.php
+│ │ │ ├── edit.php
+│ │ │ └── manage.php
+│ │ ├── lessons/
+│ │ │ ├── create.php
+│ │ │ ├── edit.php
+│ │ │ └── manage.php
+│ │ ├── materials/
+│ │ │ └── upload.php
+│ │ └── students/
+│ │ └── list.php
+│ └── admin/
+│ ├── dashboard.php
+│ ├── users/
+│ │ └── manage.php
+│ ├── categories/
+│ │ ├── create.php
+│ │ ├── edit.php
+│ │ └── list.php
+│ └── reports/
+│ └── statistics.php
+├── assets/
+│ ├── css/
+│ │ └── style.css
+│ ├── js/
+│ │ └── script.js
+│ └── uploads/
+│ ├── courses/
+│ ├── materials/
+│ └── avatars/
+├── config/
+│ └── Database.php
+├── .htaccess
+├── index.php
+└── README.md
+3. Lập trình các chức năng theo phân chia bên dưới
+Chức năng Học viên:
+•	Xem danh sách khóa học (có tìm kiếm, lọc theo danh mục)
+•	Xem chi tiết khóa học
+•	Đăng ký khóa học
+•	Xem khóa học đã đăng ký
+•	Theo dõi tiến độ học tập
+•	Xem bài học và tài liệu
+Chức năng Giảng viên:
+•	Đăng nhập/đăng xuất
+•	Tạo, chỉnh sửa, xóa khóa học
+•	Quản lý bài học
+•	Đăng tải tài liệu học tập
+•	Xem danh sách học viên đã đăng ký
+•	Theo dõi tiến độ của từng học viên
+Chức năng Quản trị viên:
+•	Quản lý người dùng (xem, kích hoạt, vô hiệu hóa)
+•	Quản lý danh mục khóa học
+•	Xem thống kê sử dụng hệ thống
+•	Duyệt phê duyệt khóa học mới
+4. Phân chia công việc cho sinh viên
+•	Nhóm 1: Xây dựng chức năng đăng nhập, đăng ký, quản lý tài khoản người dùng.
+•	Nhóm 2: Xây dựng chức năng tạo, chỉnh sửa, xóa khóa học và quản lý bài học cho giảng viên.
+•	Nhóm 3: Xây dựng chức năng hiển thị danh sách khóa học, tìm kiếm, xem chi tiết và đăng ký khóa học cho học viên.
+•	Nhóm 4: Xây dựng giao diện website (HTML, CSS, JavaScript) và tích hợp tài liệu, avatar upload.
+Lưu ý:
+•	Sinh viên cần tìm hiểu thêm về các kiến thức liên quan như: PDO, session, cookie, bảo mật, upload file, xử lý file PDF, validate input...
+•	Sử dụng password hashing (bcrypt hoặc argon2) để bảo mật mật khẩu.
+•	Kiểm tra quyền truy cập (role-based access control) cho từng trang.
+•	Sử dụng prepared statements để tránh SQL injection.
+________________________________________
+PHỤ LỤC
+Lập trình nhóm trên nền tảng Git (ví dụ với GitHub)
+Tham khảo: Học Git và GitHub (kiểm soát dự án và làm việc với team)
+Để làm việc hiệu quả với nhiều lập trình viên trên cùng một dự án website quản lý khóa học online PHP & MySQL, bạn cần tuân theo một quy trình làm việc rõ ràng và sử dụng các công cụ hỗ trợ. Dưới đây là hướng dẫn chi tiết từng bước:
+1. Lập kế hoạch và phân chia công việc:
+•	Xác định rõ ràng mục tiêu và yêu cầu của dự án: Mọi thành viên cần hiểu rõ mục tiêu chung, các tính năng cần có, giao diện mong muốn và thời hạn hoàn thành.
+•	Phân chia công việc cụ thể cho từng lập trình viên: Dựa trên kỹ năng và kinh nghiệm của mỗi người, phân công xây dựng các module riêng biệt như xử lý đăng nhập, quản lý khóa học, quản lý bài học, hiển thị giao diện... Nên chia nhỏ công việc thành các task nhỏ với thời gian hoàn thành dự kiến.
+•	Sử dụng công cụ quản lý dự án: Trello, Jira, Asana là những công cụ hữu ích để theo dõi tiến độ, giao việc và trao đổi thông tin giữa các thành viên.
+2. Sử dụng Git để quản lý mã nguồn:
+•	Tạo repository Git trên Github, Gitlab hoặc Bitbucket: Đây là nơi lưu trữ mã nguồn chung của dự án, cho phép các thành viên đồng bộ và cập nhật code.
+•	Phân nhánh (branch) cho từng tính năng hoặc task: Mỗi lập trình viên sẽ làm việc trên một branch riêng, tránh xung đột code và dễ dàng theo dõi thay đổi.
+•	Commit thường xuyên và viết commit message rõ ràng: Mỗi khi hoàn thành một phần nhỏ công việc, commit code lên branch và ghi chú rõ ràng những thay đổi đã thực hiện.
+•	Pull request và review code: Khi hoàn thành một tính năng, tạo pull request để merge code vào branch chính. Các thành viên khác sẽ review code, đưa ra góp ý và đảm bảo chất lượng code.
+3. Thiết lập môi trường phát triển đồng nhất:
+•	Sử dụng cùng phiên bản PHP, MySQL và các thư viện cần thiết: Tránh xung đột do khác biệt về phiên bản. Có thể sử dụng Docker để tạo môi trường phát triển đồng nhất cho tất cả mọi người.
+•	Thống nhất coding convention: Sử dụng cùng một chuẩn code (PSR-2) để đảm bảo code dễ đọc, dễ hiểu và dễ bảo trì.
+•	Sử dụng IDE hỗ trợ Git: PHPStorm, VS Code là những IDE phổ biến hỗ trợ Git, giúp các lập trình viên dễ dàng làm việc với mã nguồn.
+4. Trao đổi thông tin thường xuyên:
+•	Sử dụng các công cụ chat: Slack, Microsoft Teams giúp trao đổi nhanh chóng, giải đáp thắc mắc và cập nhật tiến độ.
+•	Tổ chức họp định kỳ: Họp hàng ngày hoặc hàng tuần để thảo luận về công việc, giải quyết vấn đề và đồng bộ thông tin.
+•	Ghi chép lại các quyết định quan trọng: Lưu trữ thông tin trao đổi và quyết định quan trọng trên công cụ quản lý dự án hoặc wiki.
+Hướng dẫn chi tiết với Git:
+1.	Khởi tạo repository Git: Một thành viên tạo repository trên Github/Gitlab, sau đó clone về máy tính.
+2.	Tạo branch mới: Trước khi bắt đầu làm việc, tạo một branch mới từ branch main (hoặc master) với tên mô tả tính năng sẽ phát triển (ví dụ: feature/auth, fix/bug-enrollment).
+git checkout -b feature/auth
+3.	Commit thay đổi: Sau khi hoàn thành một phần công việc, commit code với message rõ ràng.
+git add .
+git commit -m "Thêm chức năng đăng nhập và đăng ký"
+4.	Push code lên remote repository:
+git push origin feature/auth
+5.	Tạo pull request: Truy cập vào Github/Gitlab, tạo pull request để merge code từ branch feature/auth vào branch main.
+6.	Review code: Các thành viên khác review code, đưa ra comment và yêu cầu chỉnh sửa nếu cần.
+7.	Merge code: Sau khi code được review và chấp thuận, merge code vào branch main.
+Ví dụ phân chia công việc cho dự án website quản lý khóa học online:
+•	Lập trình viên A: Xây dựng chức năng đăng nhập, đăng ký, quản lý tài khoản người dùng, phân quyền (controllers, models, views).
+•	Lập trình viên B: Xây dựng chức năng tạo, chỉnh sửa, xóa khóa học, quản lý bài học, đăng tải tài liệu (controllers, models, views).
+•	Lập trình viên C: Xây dựng chức năng hiển thị danh sách khóa học, xem chi tiết, tìm kiếm, đăng ký khóa học, theo dõi tiến độ (controllers, models, views).
+•	Lập trình viên D: Thiết kế giao diện website (HTML, CSS, JavaScript), xử lý upload file.
+Lưu ý:
+•	Nên sử dụng các công cụ hỗ trợ để tự động hóa quy trình build, test và deploy code.
+•	Thường xuyên cập nhật và đồng bộ code giữa các thành viên.
+•	Giao tiếp rõ ràng và hiệu quả là chìa khóa để làm việc nhóm thành công.
+Bằng cách tuân theo các bước trên, các lập trình viên có thể làm việc cùng nhau một cách hiệu quả, xây dựng dự án website quản lý khóa học online chất lượng và đúng tiến độ.
