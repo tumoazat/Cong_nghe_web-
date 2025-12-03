@@ -6,7 +6,7 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <title>PHT Chương 4 - Website hướng dữ liệu</title>
+    <title>PHT chương 5 (mô hình MVC)</title>
     <style>
         body {
             font-family: Arial, sans-serif;
