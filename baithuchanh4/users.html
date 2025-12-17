@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh Sách Người Dùng</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .navbar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+        }
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+        }
+        .table thead {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .badge {
+            padding: 5px 10px;
+            font-size: 0.85em;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-dark mb-4">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="http://127.0.0.1:8000/users">
+                <i class="bi bi-people-fill"></i> Hệ Thống Quản Lý Người Dùng
+            </a>
+        </div>
+    </nav>
+
+    <div class="container">
+        
+        
+        <div class="card">
+    <div class="card-header bg-white py-3">
+        <div class="row align-items-center">
+            <div class="col">
+                <h4 class="mb-0"><i class="bi bi-list-ul"></i> Danh Sách Người Dùng</h4>
+            </div>
+            <div class="col-auto">
+                <a href="http://127.0.0.1:8000/users/create" class="btn btn-primary">
+                    <i class="bi bi-plus-circle"></i> Thêm Người Dùng
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle">
+                <thead>
+                    <tr>
+                        <th width="10%">Mã Người Dùng</th>
+                        <th width="20%">Tên Tài Khoản</th>
+                        <th width="30%">Email</th>
+                        <th width="15%">Vai Trò</th>
+                        <th width="25%" class="text-center">Thao Tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                                        <tr>
+                        <td><strong>#1</strong></td>
+                        <td>lc.canh</td>
+                        <td>khieu15@ta.com.vn</td>
+                        <td>
+                                                            <span class="badge bg-info">Người Dùng</span>
+                                                    </td>
+                        <td class="text-center">
+                            <a href="http://127.0.0.1:8000/users/1/edit" class="btn btn-sm btn-warning">
+                                <i class="bi bi-pencil-square"></i> Sửa
+                            </a>
+                            <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal1">
+                                <i class="bi bi-trash"></i> Xóa
+                            </button>
+
+                            <!-- Modal xác nhận xóa -->
+                            <div class="modal fade" id="deleteModal1" tabindex="-1">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Xác Nhận Xóa</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Bạn có chắc chắn muốn xóa người dùng <strong>lc.canh</strong> không?</p>
+                                            <p class="text-danger"><i class="bi bi-exclamation-triangle"></i> Hành động này không thể hoàn tác!</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                                            <form action="http://127.0.0.1:8000/users/1" method="POST" style="display: inline;">
+                                                <input type="hidden" name="_token" value="TKlls0RhrhrvjbWNMcB1lWK6E1qgUyR4ozXHGESP" autocomplete="off">                                                <input type="hidden" name="_method" value="DELETE">                                                <button type="submit" class="btn btn-danger">Xóa</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                                        <tr>
+                        <td><strong>#2</strong></td>
+                        <td>nga68</td>
+                        <td>khut.vung@yahoo.com</td>
+                        <td>
+                                                            <span class="badge bg-danger">Quản Trị Viên</span>
+                                                    </td>
+                        <td class="text-center">
+                            <a href="http://127.0.0.1:8000/users/2/edit" class="btn btn-sm btn-warning">
+                                <i class="bi bi-pencil-square"></i> Sửa
+                            </a>
+                            <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal2">
+                                <i class="bi bi-trash"></i> Xóa
+                            </button>
+
+                            <!-- Modal xác nhận xóa -->
+                            <div class="modal fade" id="deleteModal2" tabindex="-1">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Xác Nhận Xóa</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Bạn có chắc chắn muốn xóa người dùng <strong>nga68</strong> không?</p>
+                                            <p class="text-danger"><i class="bi bi-exclamation-triangle"></i> Hành động này không thể hoàn tác!</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                                            <form action="http://127.0.0.1:8000/users/2" method="POST" style="display: inline;">
+                                                <input type="hidden" name="_token" value="TKlls0RhrhrvjbWNMcB1lWK6E1qgUyR4ozXHGESP" autocomplete="off">                                                <input type="hidden" name="_method" value="DELETE">                                                <button type="submit" class="btn btn-danger">Xóa</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                                        <tr>
+                        <td><strong>#3</strong></td>
+                        <td>kieu.manh</td>
+                        <td>ethao@gmail.com</td>
+                        <td>
+                                                            <span class="badge bg-danger">Quản Trị Viên</span>
+                                                    </td>
+                        <td class="text-center">
+                            <a href="http://127.0.0.1:8000/users/3/edit" class="btn btn-sm btn-warning">
+                                <i class="bi bi-pencil-square"></i> Sửa
+                            </a>
+                            <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal3">
+                                <i class="bi bi-trash"></i> Xóa
+                            </button>
+
+                            <!-- Modal xác nhận xóa -->
+                            <div class="modal fade" id="deleteModal3" tabindex="-1">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Xác Nhận Xóa</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Bạn có chắc chắn muốn xóa người dùng <strong>kieu.manh</strong> không?</p>
+                                            <p class="text-danger"><i class="bi bi-exclamation-triangle"></i> Hành động này không thể hoàn tác!</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                                            <form action="http://127.0.0.1:8000/users/3" method="POST" style="display: inline;">
+                                                <input type="hidden" name="_token" value="TKlls0RhrhrvjbWNMcB1lWK6E1qgUyR4ozXHGESP" autocomplete="off">                                                <input type="hidden" name="_method" value="DELETE">                                                <button type="submit" class="btn btn-danger">Xóa</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                                        <tr>
+                        <td><strong>#4</strong></td>
+                        <td>thuan.la</td>
+                        <td>nhu28@mac.info</td>
+                        <td>
+                                                            <span class="badge bg-info">Người Dùng</span>
+                                                    </td>
+                        <td class="text-center">
+                            <a href="http://127.0.0.1:8000/users/4/edit" class="btn btn-sm btn-warning">
+                                <i class="bi bi-pencil-square"></i> Sửa
+                            </a>
+                            <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal4">
+                                <i class="bi bi-trash"></i> Xóa
+                            </button>
+
+                            <!-- Modal xác nhận xóa -->
+                            <div class="modal fade" id="deleteModal4" tabindex="-1">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Xác Nhận Xóa</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Bạn có chắc chắn muốn xóa người dùng <strong>thuan.la</strong> không?</p>
+                                            <p class="text-danger"><i class="bi bi-exclamation-triangle"></i> Hành động này không thể hoàn tác!</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                                            <form action="http://127.0.0.1:8000/users/4" method="POST" style="display: inline;">
+                                                <input type="hidden" name="_token" value="TKlls0RhrhrvjbWNMcB1lWK6E1qgUyR4ozXHGESP" autocomplete="off">                                                <input type="hidden" name="_method" value="DELETE">                                                <button type="submit" class="btn btn-danger">Xóa</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                                        <tr>
+                        <td><strong>#5</strong></td>
+                        <td>kieu20</td>
+                        <td>ul@gmail.com</td>
+                        <td>
+                                                            <span class="badge bg-warning">Người Kiểm Duyệt</span>
+                                                    </td>
+                        <td class="text-center">
+                            <a href="http://127.0.0.1:8000/users/5/edit" class="btn btn-sm btn-warning">
+                                <i class="bi bi-pencil-square"></i> Sửa
+                            </a>
+                            <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal5">
+                                <i class="bi bi-trash"></i> Xóa
+                            </button>
+
+                            <!-- Modal xác nhận xóa -->
+                            <div class="modal fade" id="deleteModal5" tabindex="-1">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Xác Nhận Xóa</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Bạn có chắc chắn muốn xóa người dùng <strong>kieu20</strong> không?</p>
+                                            <p class="text-danger"><i class="bi bi-exclamation-triangle"></i> Hành động này không thể hoàn tác!</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                                            <form action="http://127.0.0.1:8000/users/5" method="POST" style="display: inline;">
+                                                <input type="hidden" name="_token" value="TKlls0RhrhrvjbWNMcB1lWK6E1qgUyR4ozXHGESP" autocomplete="off">                                                <input type="hidden" name="_method" value="DELETE">                                                <button type="submit" class="btn btn-danger">Xóa</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                                        <tr>
+                        <td><strong>#6</strong></td>
+                        <td>hiep.thi</td>
+                        <td>bao.doan@mai.com</td>
+                        <td>
+                                                            <span class="badge bg-warning">Người Kiểm Duyệt</span>
+                                                    </td>
+                        <td class="text-center">
+                            <a href="http://127.0.0.1:8000/users/6/edit" class="btn btn-sm btn-warning">
+                                <i class="bi bi-pencil-square"></i> Sửa
+                            </a>
+                            <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal6">
+                                <i class="bi bi-trash"></i> Xóa
+                            </button>
+
+                            <!-- Modal xác nhận xóa -->
+                            <div class="modal fade" id="deleteModal6" tabindex="-1">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Xác Nhận Xóa</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Bạn có chắc chắn muốn xóa người dùng <strong>hiep.thi</strong> không?</p>
+                                            <p class="text-danger"><i class="bi bi-exclamation-triangle"></i> Hành động này không thể hoàn tác!</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                                            <form action="http://127.0.0.1:8000/users/6" method="POST" style="display: inline;">
+                                                <input type="hidden" name="_token" value="TKlls0RhrhrvjbWNMcB1lWK6E1qgUyR4ozXHGESP" autocomplete="off">                                                <input type="hidden" name="_method" value="DELETE">                                                <button type="submit" class="btn btn-danger">Xóa</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                                        <tr>
+                        <td><strong>#7</strong></td>
+                        <td>giap55</td>
+                        <td>san77@gmail.com</td>
+                        <td>
+                                                            <span class="badge bg-warning">Người Kiểm Duyệt</span>
+                                                    </td>
+                        <td class="text-center">
+                            <a href="http://127.0.0.1:8000/users/7/edit" class="btn btn-sm btn-warning">
+                                <i class="bi bi-pencil-square"></i> Sửa
+                            </a>
+                            <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal7">
+                                <i class="bi bi-trash"></i> Xóa
+                            </button>
+
+                            <!-- Modal xác nhận xóa -->
+                            <div class="modal fade" id="deleteModal7" tabindex="-1">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Xác Nhận Xóa</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Bạn có chắc chắn muốn xóa người dùng <strong>giap55</strong> không?</p>
+                                            <p class="text-danger"><i class="bi bi-exclamation-triangle"></i> Hành động này không thể hoàn tác!</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                                            <form action="http://127.0.0.1:8000/users/7" method="POST" style="display: inline;">
+                                                <input type="hidden" name="_token" value="TKlls0RhrhrvjbWNMcB1lWK6E1qgUyR4ozXHGESP" autocomplete="off">                                                <input type="hidden" name="_method" value="DELETE">                                                <button type="submit" class="btn btn-danger">Xóa</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                                        <tr>
+                        <td><strong>#8</strong></td>
+                        <td>toan.lu</td>
+                        <td>toan.trinh@gmail.com</td>
+                        <td>
+                                                            <span class="badge bg-danger">Quản Trị Viên</span>
+                                                    </td>
+                        <td class="text-center">
+                            <a href="http://127.0.0.1:8000/users/8/edit" class="btn btn-sm btn-warning">
+                                <i class="bi bi-pencil-square"></i> Sửa
+                            </a>
+                            <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal8">
+                                <i class="bi bi-trash"></i> Xóa
+                            </button>
+
+                            <!-- Modal xác nhận xóa -->
+                            <div class="modal fade" id="deleteModal8" tabindex="-1">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Xác Nhận Xóa</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Bạn có chắc chắn muốn xóa người dùng <strong>toan.lu</strong> không?</p>
+                                            <p class="text-danger"><i class="bi bi-exclamation-triangle"></i> Hành động này không thể hoàn tác!</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                                            <form action="http://127.0.0.1:8000/users/8" method="POST" style="display: inline;">
+                                                <input type="hidden" name="_token" value="TKlls0RhrhrvjbWNMcB1lWK6E1qgUyR4ozXHGESP" autocomplete="off">                                                <input type="hidden" name="_method" value="DELETE">                                                <button type="submit" class="btn btn-danger">Xóa</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                                        <tr>
+                        <td><strong>#9</strong></td>
+                        <td>ngan.l</td>
+                        <td>nghiem.nhan@dien.biz.vn</td>
+                        <td>
+                                                            <span class="badge bg-danger">Quản Trị Viên</span>
+                                                    </td>
+                        <td class="text-center">
+                            <a href="http://127.0.0.1:8000/users/9/edit" class="btn btn-sm btn-warning">
+                                <i class="bi bi-pencil-square"></i> Sửa
+                            </a>
+                            <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal9">
+                                <i class="bi bi-trash"></i> Xóa
+                            </button>
+
+                            <!-- Modal xác nhận xóa -->
+                            <div class="modal fade" id="deleteModal9" tabindex="-1">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Xác Nhận Xóa</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Bạn có chắc chắn muốn xóa người dùng <strong>ngan.l</strong> không?</p>
+                                            <p class="text-danger"><i class="bi bi-exclamation-triangle"></i> Hành động này không thể hoàn tác!</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                                            <form action="http://127.0.0.1:8000/users/9" method="POST" style="display: inline;">
+                                                <input type="hidden" name="_token" value="TKlls0RhrhrvjbWNMcB1lWK6E1qgUyR4ozXHGESP" autocomplete="off">                                                <input type="hidden" name="_method" value="DELETE">                                                <button type="submit" class="btn btn-danger">Xóa</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                                        <tr>
+                        <td><strong>#10</strong></td>
+                        <td>do94</td>
+                        <td>giac.nham@bac.int.vn</td>
+                        <td>
+                                                            <span class="badge bg-warning">Người Kiểm Duyệt</span>
+                                                    </td>
+                        <td class="text-center">
+                            <a href="http://127.0.0.1:8000/users/10/edit" class="btn btn-sm btn-warning">
+                                <i class="bi bi-pencil-square"></i> Sửa
+                            </a>
+                            <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal10">
+                                <i class="bi bi-trash"></i> Xóa
+                            </button>
+
+                            <!-- Modal xác nhận xóa -->
+                            <div class="modal fade" id="deleteModal10" tabindex="-1">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Xác Nhận Xóa</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Bạn có chắc chắn muốn xóa người dùng <strong>do94</strong> không?</p>
+                                            <p class="text-danger"><i class="bi bi-exclamation-triangle"></i> Hành động này không thể hoàn tác!</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                                            <form action="http://127.0.0.1:8000/users/10" method="POST" style="display: inline;">
+                                                <input type="hidden" name="_token" value="TKlls0RhrhrvjbWNMcB1lWK6E1qgUyR4ozXHGESP" autocomplete="off">                                                <input type="hidden" name="_method" value="DELETE">                                                <button type="submit" class="btn btn-danger">Xóa</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                                    </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="card-footer bg-white">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <small class="text-muted">
+                    Hiển thị 1 - 10 
+                    trong tổng số 50 bản ghi
+                </small>
+            </div>
+            <div>
+                <nav class="d-flex justify-items-center justify-content-between">
+        <div class="d-flex justify-content-between flex-fill d-sm-none">
+            <ul class="pagination">
+                
+                                    <li class="page-item disabled" aria-disabled="true">
+                        <span class="page-link">&laquo; Previous</span>
+                    </li>
+                
+                
+                                    <li class="page-item">
+                        <a class="page-link" href="http://127.0.0.1:8000/users?page=2" rel="next">Next &raquo;</a>
+                    </li>
+                            </ul>
+        </div>
+
+        <div class="d-none flex-sm-fill d-sm-flex align-items-sm-center justify-content-sm-between">
+            <div>
+                <p class="small text-muted">
+                    Showing
+                    <span class="fw-semibold">1</span>
+                    to
+                    <span class="fw-semibold">10</span>
+                    of
+                    <span class="fw-semibold">50</span>
+                    results
+                </p>
+            </div>
+
+            <div>
+                <ul class="pagination">
+                    
+                                            <li class="page-item disabled" aria-disabled="true" aria-label="&laquo; Previous">
+                            <span class="page-link" aria-hidden="true">&lsaquo;</span>
+                        </li>
+                    
+                    
+                                            
+                        
+                        
+                                                                                                                        <li class="page-item active" aria-current="page"><span class="page-link">1</span></li>
+                                                                                                                                <li class="page-item"><a class="page-link" href="http://127.0.0.1:8000/users?page=2">2</a></li>
+                                                                                                                                <li class="page-item"><a class="page-link" href="http://127.0.0.1:8000/users?page=3">3</a></li>
+                                                                                                                                <li class="page-item"><a class="page-link" href="http://127.0.0.1:8000/users?page=4">4</a></li>
+                                                                                                                                <li class="page-item"><a class="page-link" href="http://127.0.0.1:8000/users?page=5">5</a></li>
+                                                                                                        
+                    
+                                            <li class="page-item">
+                            <a class="page-link" href="http://127.0.0.1:8000/users?page=2" rel="next" aria-label="Next &raquo;">&rsaquo;</a>
+                        </li>
+                                    </ul>
+            </div>
+        </div>
+    </nav>
+
+            </div>
+        </div>
+    </div>
+</div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
+</html>
