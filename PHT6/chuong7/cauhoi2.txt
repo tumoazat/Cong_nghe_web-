@@ -1,0 +1,2 @@
+các file blade làm việc  như thế nào 
+để ghép thành file HTML cuối cùng mà trình duyệt nhận được?
